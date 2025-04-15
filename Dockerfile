@@ -25,5 +25,8 @@ FROM ubuntu:oracular
 
 WORKDIR /
 COPY --from=builder /workspace/azr-caas-down .
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
 ENTRYPOINT ["sleep", "infinity"]
